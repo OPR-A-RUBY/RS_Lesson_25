@@ -2,6 +2,7 @@
 require 'rubygems'
 require 'sinatra'
 require 'sinatra/reloader'
+require 'sqlite3'
 
 get '/' do
     erb "Hello! <a href=\"https://github.com/bootstrap-ruby/sinatra-bootstrap\">Original</a> pattern has been modified for <a href=\"http://rubyschool.us/\">Ruby School</a>"
@@ -57,7 +58,7 @@ get '/contacts' do
     erb :contacts
 end
 
-=begin
+
 post '/contacts' do
     @user_name      = params[:user_name]
     @user_mail      = params[:user_mail]
@@ -81,34 +82,16 @@ post '/contacts' do
     @title = 'Ваше обращение доставлено!'
     @message = "Спасибо за обращение. Если оно требует ответа, мы постараемся связаться с Вами в бижайшее время."
 
-    out_f = File.open './public/contacts.txt', 'a'
-    out_f.write "\n\nUser: #{@user_name}, Call: #{@user_mail},\n"
-    out_f.write "Message: #{@message_user}\n"
-    out_f.close
+    db = SQLite3::Database.new 'BarbeShop.db'
+    
+        db.execute "INSERT INTO db_t_contacts (user_name, user_mail, message_user) VALUES ('#{@user_name}', 'no mail', 'i am Groot!')"
+ 
+        #out_f.write "\n\nUser: #{@user_name}, Call: #{@user_mail},\n"
+        #out_f.write "Message: #{@message_user}\n"
+       
+    db.close
 
     erb :message
 end
-=end
 
-post '/contacts' do 
-require 'pony'
-Pony.mail(
-    :name => params[:user_name],
-    :mail => params[:user_mail],
-    :body => params[:message_user],
-    :to => 'opr.a.ruby@gmail.com',
-    :subject => params[:name] + " has contacted you",
-    :body => params[:message],
-    :port => '587',
-    :via => :smtp,
-    :via_options => { 
-        :address              => 'smtp.gmail.com', 
-        :port                 => '587', 
-        :enable_starttls_auto => true, 
-        :user_name            => 'opr.a.ruby', 
-        :password             => 'p@55w0rd', 
-        :authentication       => :plain, 
-        :domain               => 'localhost.localdomain'
-    })
-    redirect '/success' 
-end
+
