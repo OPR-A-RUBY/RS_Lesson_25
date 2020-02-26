@@ -1,6 +1,0 @@
-==================================================
-User: Dina, Phone: 000-000-00-00, Date_Time: 14 февраля 2020г 15:30
-User: opr, Phone: 987-654-32-10, Date_Time: 14 февраля 2020г 15:30 Barber: 2. Wolter White
-User: opr, Phone: 987-654-32-10, Date_Time: 14 февраля 2020г 15:30 Barber: 1. Jessie Pinkman
-User: Ekaterina, Phone: 9279275413, Date_Time: 23.02.2020 20:30 Barber: 1. Jessie Pinkman
-User: Egor, Phone: 999-888-77-66, Date_Time: now Barber: 1. Jessie Pinkman

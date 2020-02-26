@@ -46,10 +46,11 @@ post '/visit' do
     @title = 'Спасибо!'
     @message = "Спасибо вам, #{@user_name}, будем ждать Вас."
 
-    out_f = File.open './public/users.txt', 'a'
-    out_f.write "User: #{@user_name}, Phone: #{@phone},"
-    out_f.write " Date_Time: #{@date_time} Barber: #{@barber}\n"
-    out_f.close
+    db = SQLite3::Database.new 'BarberShop.db'
+    
+        db.execute "INSERT INTO db_t_visit (user_name, phone, data_time, barber) VALUES ('#{@user_name}', '#{@phone}', '#{@date_time}', '#{@barber}')"
+ 
+    db.close
 
     erb :message
 end
