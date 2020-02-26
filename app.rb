@@ -82,13 +82,10 @@ post '/contacts' do
     @title = 'Ваше обращение доставлено!'
     @message = "Спасибо за обращение. Если оно требует ответа, мы постараемся связаться с Вами в бижайшее время."
 
-    db = SQLite3::Database.new 'BarbeShop.db'
+    db = SQLite3::Database.new 'BarberShop.db'
     
-        db.execute "INSERT INTO db_t_contacts (user_name, user_mail, message_user) VALUES ('#{@user_name}', 'no mail', 'i am Groot!')"
+        db.execute "INSERT INTO db_t_contacts (user_name, user_mail, message_user) VALUES ('#{@user_name}', '#{@user_mail}', '#{@message_user}')"
  
-        #out_f.write "\n\nUser: #{@user_name}, Call: #{@user_mail},\n"
-        #out_f.write "Message: #{@message_user}\n"
-       
     db.close
 
     erb :message
